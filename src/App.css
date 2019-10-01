@@ -20,3 +20,8 @@
 .App-link {
   color: #09d3ac;
 }
+
+.my-list {
+  padding-top: 20px;
+  border-top: 1px solid black;
+}
