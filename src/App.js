@@ -5,7 +5,6 @@ import { SubmitForm } from './components/SubmitForm'
 import FormUserDetails from './components/FormUserDetails';
 
 
-
 export class App extends React.Component {
 
   state = {
@@ -48,5 +47,4 @@ export class App extends React.Component {
     )
   }
 }
-
 export default App;

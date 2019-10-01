@@ -33,14 +33,12 @@ export class FormUserDetails extends Component {
 
     onInputChange = event => {
         const { name, value } = event.target
-
         this.setState({ [name]: value })
     }
 
     onSubmit = () => {
         const { firstName, lastName, creditCardNumber } = this.state
         const { enteredData } = this.props
-
         enteredData(firstName, lastName, creditCardNumber)
     }
 
@@ -58,7 +56,9 @@ export class FormUserDetails extends Component {
                         onChange={ this.onInputChange }
                     />
                         <br/>
-                    <TextField 
+
+                      <div className='container'>
+                    <TextField className='field'
                         hintText =  'Cvv code'
                         floatingLabelText = 'Enter your Cvv'                    
                         defaultValue = {this.state.cvv}
@@ -73,8 +73,11 @@ export class FormUserDetails extends Component {
                         name={ 'expirationDate' }
                         onChange={ this.onInputChange }
                     />
+                    </div>
+                 
                     <br/>
-                    <TextField 
+                    <div className='container'>
+                    <TextField className='field'
                         hintText =  'First Name'
                         floatingLabelText = 'Enter your First Name'                   
                         defaultValue = {this.state.firstName}
@@ -89,6 +92,7 @@ export class FormUserDetails extends Component {
                         name={ 'lastName' }
                         onChange={ this.onInputChange }
                     /> 
+                    </div>
                     <br/>
                     <TextField 
                         hintText =  'Secret Question'

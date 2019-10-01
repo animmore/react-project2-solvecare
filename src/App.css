@@ -25,3 +25,12 @@
   padding-top: 20px;
   border-top: 1px solid black;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.field {
+  margin-right: 4rem;
+}
