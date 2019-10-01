@@ -21,7 +21,7 @@ export class App extends React.Component {
   this.setState({
     firstName: values1,
     lastName: values2,
-    creditCardNumber: values3
+    creditCardNumber: values3,
   });
 }
 
@@ -31,7 +31,7 @@ export class App extends React.Component {
     this.setState({
       firstName,
       lastName,
-      creditCardNumber
+      creditCardNumber,
     })
   }
 
