@@ -56,7 +56,6 @@ export class FormUserDetails extends Component {
                         onChange={ this.onInputChange }
                     />
                         <br/>
-
                       <div className='container'>
                     <TextField className='field'
                         hintText =  'Cvv code'
@@ -74,7 +73,6 @@ export class FormUserDetails extends Component {
                         onChange={ this.onInputChange }
                     />
                     </div>
-                 
                     <br/>
                     <div className='container'>
                     <TextField className='field'
