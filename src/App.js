@@ -1,10 +1,7 @@
 import React from 'react';
 import './App.css';
-
 import { SubmitForm } from './components/SubmitForm'
 import FormUserDetails from './components/FormUserDetails';
-
-
 export class App extends React.Component {
 
   state = {
