@@ -54,18 +54,25 @@ export class FormUserDetails extends Component {
             let secretAnswerValid = this.state.secretAnswerValid;
 
             switch (fieldName) {
+                // case "creditCardNumber":
+                //     fieldValidationErrors.creditCardNumberValid = cardRegex.test(value)
+                //       ? ""
+                //       : "invalid card number";
+                //     break;
+
                 case "creditCardNumber":
-                    fieldValidationErrors.creditCardNumberValid = cardRegex.test(value)
-                      ? ""
-                      : "invalid card number";
-                    break;
+                    fieldValidationErrors.creditCardNumberValid = value.match(cardRegex)
+                       ? ""
+                       : "invalid card number";
+                     break;
+
                   case "cvv":
-                    fieldValidationErrors.cvvValid = cvvRegex.test(value)
+                    fieldValidationErrors.cvvValid = value.match(cvvRegex)
                       ? ""
                       : "invalid CVV/CVC";
                     break;
                   case "expirationDate":
-                    fieldValidationErrors.expirationDateValid = expRegex.test(value)
+                    fieldValidationErrors.expirationDateValid =  value.match(expRegex)
                       ? ""
                       : "invalid MM/YY";
                     break;
