@@ -9,11 +9,6 @@ export class SubmitForm extends Component {
     constructor(props){
         super(props); 
         this.state = {
-            creditCardNumber: '',
-            cvv: '',
-            expirationDate: '',
-           
-            submitFormVisible: false,
         }
      }
      
@@ -32,7 +27,7 @@ export class SubmitForm extends Component {
                         />
                         <ListItem 
                         primaryText="Credit Card"
-                        secondaryText= { this.props.creditCardNumber }
+                        secondaryText= { this.props.creditCardNumber.slice(12,16) }
                          />
                     </List> 
                 </React.Fragment>
