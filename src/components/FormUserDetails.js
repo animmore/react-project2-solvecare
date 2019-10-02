@@ -3,7 +3,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import { FormErrors } from '../FormErrors'
 
+const cardRegex = RegExp(/^[0-9]{16}$/);
+const cvvRegex = RegExp(/^[0-9]{3,4}$/);
+const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
 
 export class FormUserDetails extends Component {
 
@@ -17,22 +21,94 @@ export class FormUserDetails extends Component {
                 lastName: '',
                 secretQuestion: '',
                 secretAnswer: '',
+
+                formErrors: {
+                    creditCardNumber: '',
+                    cvv: '',
+                    expirationDate: '',
+                    firstName: '', 
+                    lastName: '',
+                    secretQuestion: '',
+                    secretAnswer: '',
+                },
+                    creditCardNumberValid: false,
+                    cvvValid: false,
+                    expirationDateValid: false,
+                    firstNameValid: false, 
+                    lastNameValid: false,
+                    secretQuestionValid: false,
+                    secretAnswerValid: false,
             }
          }
+            
+         validateField(fieldName, value) {
+            let fieldValidationErrors = this.state.formErrors;
+            let creditCardNumberValid = this.state.creditCardNumberValid;
+            let cvvValid = this.state.cvvValid;
+            let expirationDateValid = this.state.expirationDateValid;
+            let firstNameValid = this.state.firstNameValid;
+            let lastNameValid = this.state.lastNameValid;
+            let secretQuestionValid = this.state.secretQuestionValid;
+            let secretAnswerValid = this.state.secretAnswerValid;
 
-    getValues = () => {
+            switch (fieldName) {
+                case "creditCardNumberValid":
+                    fieldValidationErrors.creditCardNumberValid = cardRegex.test(value)
+                      ? ""
+                      : "invalid card number";
+                    break;
+                  case "cvv":
+                    fieldValidationErrors.cvvValid = cvvRegex.test(value)
+                      ? ""
+                      : "invalid CVV/CVC";
+                    break;
+                  case "expirationDate":
+                    fieldValidationErrors.expirationDateValid = expRegex.test(value)
+                      ? ""
+                      : "invalid MM/YY";
+                    break;
+                case "firstName":
+                    fieldValidationErrors.firstNameValid =
+                    value.length < 1 ? "minimum 2 characaters required" : "";
+                  break;
+                case "lastName":
+                    fieldValidationErrors.lastNameValid =
+                    value.length < 1 ? "minimum 2 characaters required" : "";
+                  break;
+                case "secretQuestion":
+                    fieldValidationErrors.secretQuestionValid =
+                    value.length < 9 ? "minimum 10 characaters required" : "";
+                  break;
+                case "secretAnswer":
+                    fieldValidationErrors.secretAnswerValid =
+                    value.length < 3 ? "minimum 4 characaters required" : "";
+                  break;
+               
+                default:
+                  break;
+              }
+
+              this.setState({ fieldValidationErrors, [fieldName]: value }, () => console.log(this.state));
+        }
+        
+        validateForm() {
+            this.setState({formValid: this.state.creditCardNumberValid && this.state.cvvValid 
+            && this.state.expirationDateValid && this.state.firstNameValid 
+            && this.state.lastNameValid && this.state.secretQuestionValid 
+            && this.state.secretAnswerValid });
+            }
+        
+          errorClass(error) {
+            return(error.length === 0 ? '' : 'has-error');
+          }
+        
+        getValues = () => {
         const { firstName, lastName, creditCardNumber } = this.state
-
         return {
             firstName, 
             lastName,
             creditCardNumber
         }
-    }
-
-    onInputChange = event => {
-        const { name, value } = event.target
-        this.setState({ [name]: value })
     }
 
     onSubmit = () => {
@@ -41,13 +117,24 @@ export class FormUserDetails extends Component {
         enteredData(firstName, lastName, creditCardNumber)
     }
 
+    onInputChange = event => {
+        const { name, value } = event.target
+        this.setState({[name]: value},
+            () => { this.validateField(name, value) });
+        
+    }    
+
     render() {
+        const { fieldValidationErrors } = this.state;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title = "Enter Yours Data" />
+                   <div className='panel'>
+                    <FormErrors formErrors={this.state.formErrors} />
+                   </div>
                    
-                    <TextField 
+                    <TextField className={`form-group ${this.state.formErrors.creditCardNumber}`}
                         hintText =  'Number of credit card'
                         floatingLabelText = 'Enter your Credit Card Number'                   
                         defaultValue = {this.state.creditCardNumber}
@@ -55,68 +142,75 @@ export class FormUserDetails extends Component {
                         onChange={ this.onInputChange }
                     />
                         <br/>
-                      <div className='container'>
-                    <TextField className='field'
-                        hintText =  'Cvv code'
-                        floatingLabelText = 'Enter your Cvv'                    
-                        defaultValue = {this.state.cvv}
-                        name={ 'cvv' }
-                        onChange={ this.onInputChange }
-                    />         
-                    <br/>
-                    <TextField 
-                        hintText =  'Expiration Date'
-                        floatingLabelText = 'Enter your Expiration Date'                   
-                        defaultValue = {this.state.expirationDate}
-                        name={ 'expirationDate' }
-                        onChange={ this.onInputChange }
-                    />
-                    </div>
-                    <br/>
+
                     <div className='container'>
-                    <TextField className='field'
-                        hintText =  'First Name'
-                        floatingLabelText = 'Enter your First Name'                   
-                        defaultValue = {this.state.firstName}
-                        name={ 'firstName' }
-                        onChange={ this.onInputChange }
-                    />
-                    <br/>
-                    <TextField 
-                        hintText =  'Last Name'
-                        floatingLabelText = 'Enter your Last Name'                    
-                        defaultValue = {this.state.lastName}
-                        name={ 'lastName' }
-                        onChange={ this.onInputChange }
-                    /> 
+                        <TextField  className={`field form-group ${this.state.formErrors.cvv}`}
+                            hintText =  'Cvv code'
+                            floatingLabelText = 'Enter your Cvv'                    
+                            defaultValue = {this.state.cvv}
+                            name={ 'cvv' }
+                            onChange={ this.onInputChange }
+                        />  
+                        <br/>
+
+                        <TextField className={`field form-group ${this.state.formErrors.expirationDate}`}
+                            hintText =  'Expiration Date'
+                            floatingLabelText = 'Enter your Expiration Date'                   
+                            defaultValue = {this.state.expirationDate}
+                            name={ 'expirationDate' }
+                            onChange={ this.onInputChange }
+                        />
                     </div>
-                    <br/>
-                    <TextField 
+                        <br/>
+
+                    <div className='container'>
+                        <TextField className={`field form-group ${this.state.formErrors.firstName}`}
+                            hintText =  'First Name'
+                            floatingLabelText = 'Enter your First Name'                   
+                            defaultValue = {this.state.firstName}
+                            name={ 'firstName' }
+                            onChange={ this.onInputChange }
+                        />       
+                        <br/> 
+
+                        <TextField className={`field form-group ${this.state.formErrors.lastName}`}
+                            hintText =  'Last Name'
+                            floatingLabelText = 'Enter your Last Name'                    
+                            defaultValue = {this.state.lastName}
+                            name={ 'lastName' }
+                            onChange={ this.onInputChange }
+                        /> 
+                    </div>
+                        <br/>
+
+                    <TextField className={`form-group ${this.state.formErrors.secretQuestion}`}
                         hintText =  'Secret Question'
                         floatingLabelText = 'Enter your Secret Question'                    
                         defaultValue = {this.state.secretQuestion}
                         name={ 'secretQuestion' }
                         onChange={ this.onInputChange }
                     />
-                    <br/>
-                    <TextField 
+                        <br/>
+                    
+                    <TextField className={` form-group ${this.state.formErrors.secretAnswer}`}
                         hintText =  'Secret Answer'
                         floatingLabelText = 'Enter your Secret Answer'
                         defaultValue = {this.state.secretAnswer}
                         name={ 'secretAnswer' }
                         onChange={ this.onInputChange }
                     />
+                   
                     <br/> 
                     <RaisedButton 
                         label='Submit'
                         primary={true}
+                      
                         onClick={ this.props.onClick }     
                     />        
                     <br/> 
                 </React.Fragment>
             </MuiThemeProvider>
         )
-
     }
 }
 

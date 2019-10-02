@@ -36,8 +36,7 @@ export class SubmitForm extends Component {
                         primaryText="Credit Card"
                         secondaryText= { this.props.creditCardNumber }
                          />
-                    </List>
-                 
+                    </List> 
                 </React.Fragment>
             </MuiThemeProvider>
         )
