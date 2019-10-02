@@ -4,6 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { FormErrors } from '../FormErrors'
+import PropTypes from 'prop-types';
 
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
@@ -123,7 +124,7 @@ export class FormUserDetails extends Component {
             () => { this.validateField(name, value) });
         
     }    
-
+        
     render() {
         const { fieldValidationErrors } = this.state;
         return (
@@ -135,8 +136,8 @@ export class FormUserDetails extends Component {
                    </div>
                    
                     <TextField className={`form-group ${this.state.formErrors.creditCardNumber}`}
-                        hintText =  'Number of credit card'
-                        floatingLabelText = 'Enter your Credit Card Number'                   
+                        hintText = {this.props.creditCardNumber}             
+                        floatingLabelText = 'Enter your credit card number'     
                         defaultValue = {this.state.creditCardNumber}
                         name={ 'creditCardNumber' }
                         onChange={ this.onInputChange }
@@ -145,8 +146,8 @@ export class FormUserDetails extends Component {
 
                     <div className='container'>
                         <TextField  className={`field form-group ${this.state.formErrors.cvv}`}
-                            hintText =  'Cvv code'
-                            floatingLabelText = 'Enter your Cvv'                    
+                            hintText =  {this.props.cvv}           
+                            floatingLabelText = 'Enter your cvv'           
                             defaultValue = {this.state.cvv}
                             name={ 'cvv' }
                             onChange={ this.onInputChange }
@@ -154,7 +155,7 @@ export class FormUserDetails extends Component {
                         <br/>
 
                         <TextField className={`field form-group ${this.state.formErrors.expirationDate}`}
-                            hintText =  'Expiration Date'
+                            hintText =  {this.props.expirationDate}          
                             floatingLabelText = 'Enter your Expiration Date'                   
                             defaultValue = {this.state.expirationDate}
                             name={ 'expirationDate' }
@@ -165,7 +166,7 @@ export class FormUserDetails extends Component {
 
                     <div className='container'>
                         <TextField className={`field form-group ${this.state.formErrors.firstName}`}
-                            hintText =  'First Name'
+                            hintText =  {this.props.firstName}       
                             floatingLabelText = 'Enter your First Name'                   
                             defaultValue = {this.state.firstName}
                             name={ 'firstName' }
@@ -174,7 +175,7 @@ export class FormUserDetails extends Component {
                         <br/> 
 
                         <TextField className={`field form-group ${this.state.formErrors.lastName}`}
-                            hintText =  'Last Name'
+                            hintText =  {this.props.lastName}       
                             floatingLabelText = 'Enter your Last Name'                    
                             defaultValue = {this.state.lastName}
                             name={ 'lastName' }
@@ -184,7 +185,7 @@ export class FormUserDetails extends Component {
                         <br/>
 
                     <TextField className={`form-group ${this.state.formErrors.secretQuestion}`}
-                        hintText =  'Secret Question'
+                        hintText =  {this.props.secretQuestion}       
                         floatingLabelText = 'Enter your Secret Question'                    
                         defaultValue = {this.state.secretQuestion}
                         name={ 'secretQuestion' }
@@ -193,7 +194,7 @@ export class FormUserDetails extends Component {
                         <br/>
                     
                     <TextField className={` form-group ${this.state.formErrors.secretAnswer}`}
-                        hintText =  'Secret Answer'
+                        hintText =  {this.props.secretAnswer}  
                         floatingLabelText = 'Enter your Secret Answer'
                         defaultValue = {this.state.secretAnswer}
                         name={ 'secretAnswer' }
@@ -213,5 +214,24 @@ export class FormUserDetails extends Component {
         )
     }
 }
+FormUserDetails.propTypes = {
+    creditCardNumber: PropTypes.string,
+    expirationDate: PropTypes.string,
+    cvv: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    secretQuestion: PropTypes.string,
+    secretAnswer: PropTypes.string,
+  }
+
+   FormUserDetails.defaultProps = {
+    creditCardNumber: '0000 0000 0000 0000',
+    expirationDate: 'MM/YY',
+    cvv: 'CVV/CVC',
+    firstName: 'Your Name',
+    lastName: 'Your Surname',
+    secretQuestion: 'Your secret question',
+    secretAnswer: 'Your secret answer',
+  }
 
 export default FormUserDetails;
