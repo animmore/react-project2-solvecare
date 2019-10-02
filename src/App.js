@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { SubmitForm } from './components/SubmitForm'
 import FormUserDetails from './components/FormUserDetails';
+
 export class App extends React.Component {
 
   state = {
@@ -34,6 +35,7 @@ export class App extends React.Component {
 
   render() {
       return (
+        
         <div className="App">
             <FormUserDetails ref={ form => this.form = form } onClick={ this.onSubmit } enteredData = {this.enteredData}/>
             <SubmitForm  

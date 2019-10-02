@@ -12,10 +12,8 @@ export class SubmitForm extends Component {
             creditCardNumber: '',
             cvv: '',
             expirationDate: '',
-            firstName: '', 
-            lastName: '',
-            secretQuestion: '',
-            secretAnswer: '',
+           
+            submitFormVisible: false,
         }
      }
      

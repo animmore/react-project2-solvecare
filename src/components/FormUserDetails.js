@@ -22,6 +22,7 @@ export class FormUserDetails extends Component {
                 lastName: '',
                 secretQuestion: '',
                 secretAnswer: '',
+                submitFormVisible: false,
 
                 formErrors: {
                     creditCardNumber: '',
@@ -53,7 +54,7 @@ export class FormUserDetails extends Component {
             let secretAnswerValid = this.state.secretAnswerValid;
 
             switch (fieldName) {
-                case "creditCardNumberValid":
+                case "creditCardNumber":
                     fieldValidationErrors.creditCardNumberValid = cardRegex.test(value)
                       ? ""
                       : "invalid card number";
@@ -70,11 +71,11 @@ export class FormUserDetails extends Component {
                     break;
                 case "firstName":
                     fieldValidationErrors.firstNameValid =
-                    value.length < 1 ? "minimum 2 characaters required" : "";
+                    value.length < 2 ? "minimum 3 characaters required" : "";
                   break;
                 case "lastName":
                     fieldValidationErrors.lastNameValid =
-                    value.length < 1 ? "minimum 2 characaters required" : "";
+                    value.length < 2 ? "minimum 3 characaters required" : "";
                   break;
                 case "secretQuestion":
                     fieldValidationErrors.secretQuestionValid =
