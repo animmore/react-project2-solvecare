@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { FormErrors } from '../FormErrors'
 import PropTypes from 'prop-types';
+import '../App.css';
 
 const cardRegex = RegExp(/^[0-9]{16}$/);
 const cvvRegex = RegExp(/^[0-9]{3,4}$/);
@@ -54,11 +55,6 @@ export class FormUserDetails extends Component {
             let secretAnswerValid = this.state.secretAnswerValid;
 
             switch (fieldName) {
-                // case "creditCardNumber":
-                //     fieldValidationErrors.creditCardNumberValid = cardRegex.test(value)
-                //       ? ""
-                //       : "invalid card number";
-                //     break;
 
                 case "creditCardNumber":
                     fieldValidationErrors.creditCardNumberValid = value.match(cardRegex)
@@ -139,11 +135,11 @@ export class FormUserDetails extends Component {
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title = "Enter Yours Data" />
-                   <div className='panel'>
+                   <div>
                     <FormErrors formErrors={this.state.formErrors} />
                    </div>
                    
-                    <TextField className={`form-group ${this.state.formErrors.creditCardNumber}`}
+                    <TextField className={`${this.state.formErrors.creditCardNumber}`} 
                         hintText = {this.props.creditCardNumber}             
                         floatingLabelText = 'Enter your credit card number'     
                         defaultValue = {this.state.creditCardNumber}
@@ -153,7 +149,7 @@ export class FormUserDetails extends Component {
                         <br/>
 
                     <div className='container'>
-                        <TextField  className={`field form-group ${this.state.formErrors.cvv}`}
+                        <TextField  className={`field ${this.state.formErrors.cvv}`}
                             hintText =  {this.props.cvv}           
                             floatingLabelText = 'Enter your cvv'           
                             defaultValue = {this.state.cvv}
@@ -162,7 +158,7 @@ export class FormUserDetails extends Component {
                         />  
                         <br/>
 
-                        <TextField className={`field form-group ${this.state.formErrors.expirationDate}`}
+                        <TextField className={`field ${this.state.formErrors.expirationDate}`}
                             hintText =  {this.props.expirationDate}          
                             floatingLabelText = 'Enter your Expiration Date'                   
                             defaultValue = {this.state.expirationDate}
@@ -173,16 +169,16 @@ export class FormUserDetails extends Component {
                         <br/>
 
                     <div className='container'>
-                        <TextField className={`field form-group ${this.state.formErrors.firstName}`}
+                        <TextField className={`field ${this.state.formErrors.firstName}`}
                             hintText =  {this.props.firstName}       
                             floatingLabelText = 'Enter your First Name'                   
                             defaultValue = {this.state.firstName}
                             name={ 'firstName' }
-                            onChange={ this.onInputChange }
+                            onChange={ this.onInputChange }                            
                         />       
                         <br/> 
 
-                        <TextField className={`field form-group ${this.state.formErrors.lastName}`}
+                        <TextField className={`field ${this.state.formErrors.lastName}`}
                             hintText =  {this.props.lastName}       
                             floatingLabelText = 'Enter your Last Name'                    
                             defaultValue = {this.state.lastName}
@@ -192,7 +188,7 @@ export class FormUserDetails extends Component {
                     </div>
                         <br/>
 
-                    <TextField className={`form-group ${this.state.formErrors.secretQuestion}`}
+                    <TextField className={`${this.state.formErrors.secretQuestion}`}
                         hintText =  {this.props.secretQuestion}       
                         floatingLabelText = 'Enter your Secret Question'                    
                         defaultValue = {this.state.secretQuestion}
@@ -201,7 +197,7 @@ export class FormUserDetails extends Component {
                     />
                         <br/>
                     
-                    <TextField className={` form-group ${this.state.formErrors.secretAnswer}`}
+                    <TextField className={`${this.state.formErrors.secretAnswer}`}
                         hintText =  {this.props.secretAnswer}  
                         floatingLabelText = 'Enter your Secret Answer'
                         defaultValue = {this.state.secretAnswer}

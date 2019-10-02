@@ -3,7 +3,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {List, ListItem} from 'material-ui/List'
 import '../App.css';
 
-
 export class SubmitForm extends Component {
   
     constructor(props){

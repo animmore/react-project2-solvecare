@@ -34,3 +34,7 @@
 .field {
   margin-right: 4rem;
 }
+
+TextField.error {
+  border-bottom: 1px solid red;
+}
