@@ -21,7 +21,7 @@ export class Component2 extends Component {
         timerID: false,
         startAt: '',
       });
-    }, 5000000);
+    }, 5000);
 
     this.setState({
       isFormVisible: true,
