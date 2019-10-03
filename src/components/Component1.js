@@ -215,7 +215,7 @@ export class Component1 extends Component {
           />
 
           <br />
-          <button label="Submit" primary={true} onClick={this.props.onClick} >Submit</button>
+          <RaisedButton label="Submit" primary={true} onClick={this.props.onClick} />
           <br />
 
           <div>
