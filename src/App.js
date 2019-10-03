@@ -15,14 +15,6 @@ export class App extends React.Component {
     secretAnswer: '',
 }
 
-  enteredData = (values1, values2, values3) => {
-  this.setState({
-    firstName: values1,
-    lastName: values2,
-    creditCardNumber: values3,
-  });
-}
-
   onSubmit = () => {
     const values = this.form.getValues()
     const { firstName, lastName, creditCardNumber } = values
@@ -37,7 +29,7 @@ export class App extends React.Component {
       return (
         
         <div className="App">
-            <FormUserDetails ref={ form => this.form = form } onClick={ this.onSubmit } enteredData = {this.enteredData}/>
+            <FormUserDetails ref={ form => this.form = form } onClick={ this.onSubmit }/>
             <SubmitForm  
             firstName={this.state.firstName}
             lastName={this.state.lastName}

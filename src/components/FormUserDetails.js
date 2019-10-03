@@ -74,7 +74,7 @@ export class FormUserDetails extends Component {
                     break;
                 case "firstName":
                     fieldValidationErrors.firstNameValid =
-                    value.length < 2 ? "minimum 3 characaters required" : "";
+                    value.length < 3 ? "minimum 3 characaters required" : "";
                   break;
                 case "lastName":
                     fieldValidationErrors.lastNameValid =
@@ -114,12 +114,6 @@ export class FormUserDetails extends Component {
             lastName,
             creditCardNumber
         }
-    }
-
-    onSubmit = () => {
-        const { firstName, lastName, creditCardNumber } = this.state
-        const { enteredData } = this.props
-        enteredData(firstName, lastName, creditCardNumber)
     }
 
     onInputChange = event => {
@@ -209,7 +203,6 @@ export class FormUserDetails extends Component {
                     <RaisedButton 
                         label='Submit'
                         primary={true}
-                      
                         onClick={ this.props.onClick }     
                     />        
                     <br/> 
