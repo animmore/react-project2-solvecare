@@ -49,6 +49,7 @@ export class Component2 extends Component {
   }
 
   render() {
+    console.log('(render) Component2')
     const { firstName, lastName, creditCardNumber, typeOfCard } = this.props;
     const { isFormVisible } = this.state;
     if (!isFormVisible || (!firstName && !lastName && !creditCardNumber)) {

@@ -28,6 +28,7 @@ export class App extends React.Component {
 
   render() {
     return (
+      
       <div className="App">
         <Component1 ref={form => (this.form = form)} onClick={this.onSubmit} />
         <Component2

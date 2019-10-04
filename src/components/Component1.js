@@ -132,6 +132,7 @@ export class Component1 extends Component {
   };
 
   render() {
+    console.log('(render) Component1')
     const { fieldValidationErrors, creditCardNumber } = this.state;
     return (
       <MuiThemeProvider>

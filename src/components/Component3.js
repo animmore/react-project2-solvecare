@@ -26,12 +26,13 @@ export class Component3 extends Component {
       this.setState({
          typeOfCard, 
       })
-      
+
       this.props.onTypeOfCard(typeOfCard);
     }
   }
 
   render() {
+    console.log('(render) Component3')
     if (!this.state.typeOfCard) return null;
     return <div></div>;
   }
