@@ -22,9 +22,11 @@ export class Component3 extends Component {
     if (prevProps.creditCardNumber !== creditCardNumber) {
       const lastNums = creditCardNumber.slice(12, 16);
       const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card';
+
       this.setState({
          typeOfCard, 
       })
+      
       this.props.onTypeOfCard(typeOfCard);
     }
   }
