@@ -1,19 +1,33 @@
+//@flow
+
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { List, ListItem } from 'material-ui/List'
 
 import '../App.css'
 
-export class Component2 extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+type Props = {
+  firstName: string,
+  lastName: string,
+  creditCardNumber: string,
+  typeOfCard: string,
+
+}
+
+type State = {
+  isFormVisible: boolean,
+  timerID: boolean,
+  startAt: any,
+}
+
+export class Component2 extends Component<Props, State> {
+
+    state = {
       isFormVisible: false,
-      timerID: '',
+      timerID: false,
       startAt: '',
     }
-  }
-
+  
   startTimer = () => {
     const timerID = setTimeout(() => {
       this.setState({
@@ -25,12 +39,12 @@ export class Component2 extends Component {
 
     this.setState({
       isFormVisible: true,
-      timerID,
+      timerID: true,
       startAt: Date.now(),
     })
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (
       prevProps.firstName === this.props.firstName &&
       prevProps.lastName === this.props.lastName &&
@@ -39,12 +53,11 @@ export class Component2 extends Component {
       return
     }
 
-    if (!this.state.visible) {
+    if (!this.state.isFormVisible) {
       return this.startTimer()
     }
 
     const { timerID } = this.state
-    clearTimeout(timerID)
     this.startTimer()
   }
 

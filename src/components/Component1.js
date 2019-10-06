@@ -1,9 +1,9 @@
-
+// @flow
 
 import React, {Component} from 'react'
 import Component3 from './Component3'
 
-import PropTypes, {bool, object, number} from 'prop-types'
+import PropTypes, {bool, object, number, any} from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import TextField from 'material-ui/TextField'
@@ -12,19 +12,12 @@ import {FormErrors} from '../FormErrors'
 import '../App.css'
 
 type Props = {|
-  onClick: (
+  onSubmit: (
     creditCardNumber: string,
-    expirationDate: string,
-    cvv: string,
     firstName: string,
     lastName: string,
-    secretQuestion: string,
-    secretAnswer: string,
-    submitFormVisible: boolean,
+    typeOfCard: string,
   ) => void,
-
-  handleTypeOfCardChange: (typeOfCard: string) => void,
-  creditCardNumber: (creditCardNumber: string) => void,
 |}
 
 type State = {|
@@ -38,17 +31,11 @@ type State = {|
   submitFormVisible: boolean,
   typeOfCard: string,
 
-  fieldValidationErrors: string, 
+  fieldValidationErrors: object, 
 
-  formValid: boolean,
-  formErrors: any,
-  creditCardNumberValid: boolean,
-  cvvValid: boolean,
-  expirationDateValid: boolean,
-  firstNameValid: boolean,
-  lastNameValid: boolean,
-  secretQuestionValid: boolean,
-  secretAnswerValid: boolean,
+  formValid: any,
+  formErrors: object,
+ 
 |}
 
 const cardRegex = RegExp(/^[0-9]{16}$/)
@@ -67,6 +54,8 @@ export class Component1 extends Component<Props, State> {
     submitFormVisible: false,
     typeOfCard: '',
    
+    formValid: object,
+    fieldValidationErrors: '',
     formErrors: {
       creditCardNumber: '',
       cvv: '',
@@ -75,28 +64,19 @@ export class Component1 extends Component<Props, State> {
       lastName: '',
       secretQuestion: '',
       secretAnswer: '',
-    },
-    fieldValidationErrors: '', 
-    formValid: bool,
-    creditCardNumberValid: false,
-    cvvValid: false,
-    expirationDateValid: false,
-    firstNameValid: false,
-    lastNameValid: false,
-    secretQuestionValid: false,
-    secretAnswerValid: false,
+    }
   }
 
   validateForm() {
     this.setState({
       formValid:
-        this.state.creditCardNumberValid &&
-        this.state.cvvValid &&
-        this.state.expirationDateValid &&
-        this.state.firstNameValid &&
-        this.state.lastNameValid &&
-        this.state.secretQuestionValid &&
-        this.state.secretAnswerValid,
+        this.state.formErrors.creditCardNumber &&
+        this.state.formErrors.cvv &&
+        this.state.formErrors.expirationDate &&
+        this.state.formErrors.firstName &&
+        this.state.formErrors.lastName &&
+        this.state.formErrors.secretQuestion &&
+        this.state.formErrors.secretAnswer,
     })
   }
 
@@ -104,7 +84,6 @@ export class Component1 extends Component<Props, State> {
     const {firstName, lastName, creditCardNumber, typeOfCard} = this.state
 
     this.props.onSubmit(firstName, lastName, creditCardNumber, typeOfCard)
-  
   }
 
   handleInputChange = (event: SyntheticEvent<HTMLInputElement>) => {
@@ -116,41 +95,41 @@ export class Component1 extends Component<Props, State> {
 
   validateField(fieldName: string, value: string) {
     const fieldValidationErrors = this.state.formErrors
-    const {creditCardNumberValid} = this.state
-    const {cvvValid} = this.state
-    const {expirationDateValid} = this.state
-    const {firstNameValid} = this.state
-    const {lastNameValid} = this.state
-    const {secretQuestionValid} = this.state
-    const {secretAnswerValid} = this.state
+    const {creditCardNumber} = this.state
+    const {cvv} = this.state
+    const {expirationDate} = this.state
+    const {firstName} = this.state
+    const {lastName} = this.state
+    const {secretQuestion} = this.state
+    const {secretAnswer} = this.state
 
     switch (fieldName) {
       case 'creditCardNumber':
-        fieldValidationErrors.creditCardNumberValid = value.match(cardRegex)
+        fieldValidationErrors.creditCardNumber = value.match(cardRegex)
           ? ''
           : 'invalid card number'
         break
 
       case 'cvv':
-        fieldValidationErrors.cvvValid = value.match(cvvRegex) ? '' : 'invalid CVV/CVC'
+        fieldValidationErrors.cvv = value.match(cvvRegex) ? '' : 'invalid CVV/CVC'
         break
       case 'expirationDate':
-        fieldValidationErrors.expirationDateValid = value.match(expRegex) ? '' : 'invalid MM/YY'
+        fieldValidationErrors.expirationDate = value.match(expRegex) ? '' : 'invalid MM/YY'
         break
       case 'firstName':
-        fieldValidationErrors.firstNameValid =
+        fieldValidationErrors.firstName =
           value.length < 3 ? 'minimum 3 characaters required' : ''
         break
       case 'lastName':
-        fieldValidationErrors.lastNameValid =
+        fieldValidationErrors.lastName =
           value.length < 2 ? 'minimum 3 characaters required' : ''
         break
       case 'secretQuestion':
-        fieldValidationErrors.secretQuestionValid =
+        fieldValidationErrors.secretQuestion =
           value.length < 9 ? 'minimum 10 characaters required' : ''
         break
       case 'secretAnswer':
-        fieldValidationErrors.secretAnswerValid =
+        fieldValidationErrors.secretAnswer =
           value.length < 3 ? 'minimum 4 characaters required' : ''
         break
 
