@@ -1,20 +1,273 @@
 {
-    "parser": "babel-eslint",
-    "parserOptions": {
-    "sourceType": "module",
-    "allowImportExportEverywhere": false,
-    "codeFrame": false
-},
-"extends": ["airbnb", "prettier"],
-"env": {
+  "parser": "babel-eslint",
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ],
+  "env": {
     "browser": true,
-    "jest": true
-},
-"rules": {
-    "max-len": ["error", {"code": 100}],
-    "prefer-promise-reject-errors": ["off"],
-    "react/jsx-filename-extension": ["off"],
-    "react/prop-types": ["warn"],
-    "no-return-assign": ["off"]
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true,
+      "legacyDecorators": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "16.4.0"
+    },
+    "import/ignore": [
+      "node_modules",
+      "\\.(json|css|jpg|png|gif|eot|svg|ttf|woff|woff2|mp4|webm)$"
+    ],
+    "import/extensions": [
+      ".js"
+    ],
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".json"
+        ]
+      }
+    }
+  },
+  "rules": {
+    // require function declarations instead of expressions
+    "func-style": [
+      "warn",
+      "declaration",
+      {
+        "allowArrowFunctions": true
+      }
+    ],
+    
+    "max-len": [
+      "warn",
+      120
+    ],
+    // require or disallow use of semicolons instead of ASI
+    "semi": [
+      "warn",
+      "never"
+    ],
+    // require the use of === and !== except null comparison
+    "eqeqeq": [
+      "warn",
+      "smart"
+    ],
+    // disallow use of eval()
+    "no-eval": "warn",
+    // disallow use of eval()-like methods
+    "no-implied-eval": "warn",
+    // disallow adding to native types
+    "no-extend-native": "warn",
+    // disallow creation of functions within loops
+    "no-loop-func": "warn",
+    // disallow magic numbers
+    // http://eslint.org/docs/rules/no-magic-numbers
+    "no-magic-numbers": [
+      "off",
+      {
+        "ignore": [],
+        "ignoreArrayIndexes": true,
+        "enforceConst": true,
+        "detectObjects": false
+      }
+    ],
+    // disallows creating new instances of String, Number, and Boolean
+    "no-new-wrappers": "warn",
+    // https://eslint.org/docs/rules/space-before-blocks
+    "space-before-blocks": "warn",
+    // https://eslint.org/docs/rules/keyword-spacing
+    "keyword-spacing": "warn",
+    
+    // https://eslint.org/docs/rules/space-infix-ops
+    "space-infix-ops": "warn",
+    // specify whether double or single quotes should be used
+    "quotes": [
+      "warn",
+      "single",
+      "avoid-escape"
+    ],
+    // disallow else after a return in an if
+    // https://eslint.org/docs/rules/no-else-return
+    "no-else-return": [
+      "warn",
+      {
+        "allowElseIf": false
+      }
+    ],
+    // require space before/after dependencies function"s dependencies
+    "arrow-spacing": [
+      "warn",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    // Require Following Curly Brace Conventions (curly)
+    // https://github.com/eslint/eslint/blob/master/docs/rules/curly.md
+    "curly": [
+      "warn"
+    ],
+    // Enforce Usage of Spacing in Template Strings
+    // https://eslint.org/docs/rules/template-curly-spacing
+    "template-curly-spacing": [
+      "warn",
+      "never"
+    ],
+    // require an empty line before return|export statements
+    // https://eslint.org/docs/rules/newline-before-return
+    "padding-line-between-statements": [
+      "warn",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "return"
+      },
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "export"
+      }
+    ],
+    "arrow-parens": [
+      "warn",
+      "as-needed"
+    ],
+    // suggest using of const declaration for variables that are never modified after declared
+    "prefer-const": "warn",
+    // restrict what can be thrown as an exception
+    "no-throw-literal": "warn",
+    "jsx-quotes": [
+      "warn",
+      "prefer-double"
+    ],
+    // disallow Unused Expressions
+    "no-unused-expressions": [
+      "warn",
+      {
+        "allowShortCircuit": true
+      }
+    ],
+   
+    // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
+    "react/jsx-equals-spacing": [
+      "warn",
+      "never"
+    ],
+    // Prevent duplicate props in JSX
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-duplicate-props.md
+    "react/jsx-no-duplicate-props": [
+      "warn",
+      {
+        "ignoreCase": true
+      }
+    ],
+    // Disallow undeclared variables in JSX
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-undef.md
+    "react/jsx-no-undef": "warn",
+    // Enforce PascalCase for user-defined JSX components
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md
+    "react/jsx-pascal-case": [
+      "warn",
+      {
+        "allowAllCaps": true,
+        "ignore": []
+      }
+    ],
+    // Prevent React to be incorrectly marked as unused
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md
+    "react/jsx-uses-react": "warn",
+    // Prevent variables used in JSX to be incorrectly marked as unused
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md
+    "react/jsx-uses-vars": "warn",
+    // Prevent missing parentheses around multilines JSX
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md
+    "react/jsx-wrap-multilines": "warn",
+    // Enforce or disallow spaces inside of curly braces in JSX attributes
+   
+    // Prevent usage of deprecated methods
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-deprecated.md
+    "react/no-deprecated": "warn",
+    // Prevent usage of setState in componentDidMount
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md
+    "react/no-did-mount-set-state": "warn",
+    // Prevent direct mutation of this.state
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-direct-mutation-state.md
+    "react/no-direct-mutation-state": "warn",
+    // Prevent usage of isMounted
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md
+    "react/no-is-mounted": "warn",
+    // Prevent missing React when using JSX
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md
+    "react/react-in-jsx-scope": "warn",
+    // Require render() methods to return something
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md
+    "react/require-render-return": "warn",
+    // Prevent extra closing tags for components without children
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
+    "react/self-closing-comp": [
+      "warn",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    // Validate closing bracket location in JSX
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md
+    "react/jsx-closing-bracket-location": "warn",
+    // Prevent using string references
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md
+    "react/no-string-refs": "warn",
+    // Enforce boolean attributes notation in JSX
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
+    "react/jsx-boolean-value": "warn",
+    // Validate whitespace in and around the JSX opening and closing brackets
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md
+    "react/jsx-tag-spacing": [
+      "warn",
+      {
+        "closingSlash": "never",
+        "beforeSelfClosing": "always",
+        "afterOpening": "never"
+      }
+    ],
+   
+   
+    // Enforce propTypes declarations alphabetical sorting
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-prop-types.md
+    "react/sort-prop-types": [
+      "off",
+      {
+        "ignoreCase": true,
+        "callbacksLast": false,
+        "requiredFirst": false
+      }
+    ],
+    // Require stateless functions when not using lifecycle methods, setState or ref
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
+    "react/prefer-stateless-function": [
+      "warn",
+      {
+        "ignorePureComponents": true
+      }
+    ],
+    // Prevent usage of Array index in keys
+    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+    "react/no-array-index-key": "warn",
+    // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
+    "jsx-a11y/aria-role": "warn",
+    "jsx-a11y/no-access-key": "warn",
+    "jsx-a11y/img-redundant-alt": "warn"
   }
 }

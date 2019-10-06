@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import Component1 from './components/Component1';
-import { Component2 } from './components/Component2';
+import React from 'react'
+import './App.css'
+import Component1 from './components/Component1'
+import { Component2 } from './components/Component2'
 
 export class App extends React.Component {
   state = {
@@ -15,22 +15,23 @@ export class App extends React.Component {
     typeOfCard: '',
   };
 
-  onSubmit = () => {
-    const values = this.form.getValues();
-    const { firstName, lastName, creditCardNumber, typeOfCard } = values;
+  onSubmit = (firstName, lastName, creditCardNumber, typeOfCard) => {
+    
     this.setState({
       firstName,
       lastName,
       creditCardNumber,
       typeOfCard, 
-    });
+    })
   };
 
   render() {
+    console.log('(render) App')
+
     return (
       
       <div className="App">
-        <Component1 ref={form => (this.form = form)} onClick={this.onSubmit} />
+        <Component1 onSubmit={this.onSubmit} />
         <Component2
           firstName={this.state.firstName}
           lastName={this.state.lastName}
@@ -38,7 +39,8 @@ export class App extends React.Component {
           typeOfCard={this.state.typeOfCard}
         />
       </div>
-    );
+    )
   }
 }
-export default App;
+
+export default App
