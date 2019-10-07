@@ -1,3 +1,4 @@
+
 //@flow
 
 import React, {Component} from 'react'
@@ -15,6 +16,9 @@ type State = {
 }
 
 export class Component3 extends React.PureComponent<Props, State> {
+
+  static whyDidYouRender = true
+
   state = {
     typeOfCard: '',
   }
@@ -48,7 +52,7 @@ export class Component3 extends React.PureComponent<Props, State> {
       return null
     }
 
-    return <div></div>
+    return <div />
   }
 }
 
