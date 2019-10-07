@@ -42,8 +42,7 @@ const cvvRegex = RegExp(/^[0-9]{3,4}$/)
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
 
 export class Component1 extends React.PureComponent<Props, State> {
-  
-   static whyDidYouRender = true
+  static whyDidYouRender = true
 
   state = {
     creditCardNumber: '',

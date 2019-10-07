@@ -1,39 +1,38 @@
 //@flow
 
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { List, ListItem } from 'material-ui/List'
+import {List, ListItem} from 'material-ui/List'
 
 import '../App.css'
+import {number} from 'prop-types'
 
 type Props = {
   firstName: string,
   lastName: string,
   creditCardNumber: string,
   typeOfCard: string,
-
 }
 
 type State = {
   isFormVisible: boolean,
   timerID: boolean,
-  startAt: any,
+  startAt: number,
 }
 
 export class Component2 extends Component<Props, State> {
+  state = {
+    isFormVisible: false,
+    timerID: false,
+    startAt: number,
+  }
 
-    state = {
-      isFormVisible: false,
-      timerID: false,
-      startAt: '',
-    }
-  
   startTimer = () => {
     const timerID = setTimeout(() => {
       this.setState({
         isFormVisible: false,
         timerID: false,
-        startAt: '',
+        startAt: number,
       })
     }, 5000)
 
@@ -57,21 +56,21 @@ export class Component2 extends Component<Props, State> {
       return this.startTimer()
     }
 
-    const { timerID } = this.state
+    const {timerID} = this.state
     this.startTimer()
   }
 
   render() {
     console.log('(render) Component2')
-    const { firstName, lastName, creditCardNumber, typeOfCard } = this.props
-    const { isFormVisible } = this.state
+    const {firstName, lastName, creditCardNumber, typeOfCard} = this.props
+    const {isFormVisible} = this.state
     if (!isFormVisible || (!firstName && !lastName && !creditCardNumber)) {
       return null
     }
 
     return (
       <MuiThemeProvider>
-      <React.Fragment>
+        <React.Fragment>
           <List className="my-list">
             <ListItem primaryText="First Name" secondaryText={this.props.firstName} />
             <ListItem primaryText="Last Name" secondaryText={this.props.lastName} />
