@@ -3,7 +3,6 @@
 import React, {Component} from 'react'
 import Component3 from './Component3'
 
-import PropTypes, {bool, object, number, any} from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import AppBar from 'material-ui/AppBar'
 import TextField from 'material-ui/TextField'
@@ -31,10 +30,18 @@ type State = {|
   submitFormVisible: boolean,
   typeOfCard: string,
 
-  fieldValidationErrors: object,
+  fieldValidationErrors: any,
 
   formValid: any,
-  formErrors: object,
+  formErrors: {
+    creditCardNumber: string,
+    expirationDate: string,
+    cvv: string,
+    firstName: string,
+    lastName: string,
+    secretQuestion: string,
+    secretAnswer: string,
+  },
 |}
 
 const cardRegex = RegExp(/^[0-9]{16}$/)
@@ -55,7 +62,7 @@ export class Component1 extends React.PureComponent<Props, State> {
     submitFormVisible: false,
     typeOfCard: '',
 
-    formValid: object,
+    formValid: '',
     fieldValidationErrors: '',
     formErrors: {
       creditCardNumber: '',

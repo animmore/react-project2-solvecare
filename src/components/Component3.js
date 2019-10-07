@@ -1,13 +1,11 @@
-
 //@flow
 
 import React, {Component} from 'react'
-import PropTypes, {number, any} from 'prop-types'
 import {List, ListItem} from 'material-ui/List'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 type Props = {
-  creditCardNumber: any,
+  creditCardNumber: string,
   onTypeOfCard: (v1: string) => void,
 }
 
@@ -16,7 +14,6 @@ type State = {
 }
 
 export class Component3 extends React.PureComponent<Props, State> {
-
   static whyDidYouRender = true
 
   state = {
@@ -26,8 +23,8 @@ export class Component3 extends React.PureComponent<Props, State> {
   componentDidMount() {
     const {creditCardNumber} = this.props
 
-    const lastNums = creditCardNumber.slice(12, 16)
-    const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card'
+    const typeOfCard =
+      creditCardNumber && +creditCardNumber.slice(12, 16) < 2000 ? 'Visa' : 'Master Card'
 
     this.setState({typeOfCard})
   }
@@ -36,7 +33,8 @@ export class Component3 extends React.PureComponent<Props, State> {
     const {creditCardNumber, onTypeOfCard} = this.props
     if (prevProps.creditCardNumber !== creditCardNumber) {
       const lastNums = creditCardNumber.slice(12, 16)
-      const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card'
+      const typeOfCard =
+        creditCardNumber && +creditCardNumber.slice(12, 16) < 2000 ? 'Visa' : 'Master Card'
 
       this.setState({
         typeOfCard,
@@ -54,11 +52,6 @@ export class Component3 extends React.PureComponent<Props, State> {
 
     return <div />
   }
-}
-
-Component3.propTypes = {
-  creditCardNumber: PropTypes.string,
-  onTypeOfCard: PropTypes.func,
 }
 
 export default Component3
