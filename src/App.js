@@ -2,7 +2,7 @@
 import React from 'react'
 import './App.css'
 import Component1 from './components/Component1'
-import { Component2 } from './components/Component2'
+import {Component2} from './components/Component2'
 
 type Props = {
   onSubmit: (
@@ -11,7 +11,6 @@ type Props = {
     lastName: string,
     typeOfCard: string,
   ) => void,
-
 }
 
 type State = {|
@@ -23,7 +22,7 @@ type State = {|
   secretQuestion: string,
   secretAnswer: string,
   typeOfCard: string,
-  |}
+|}
 
 export class App extends React.Component<Props, State> {
   state = {
@@ -35,23 +34,26 @@ export class App extends React.Component<Props, State> {
     secretQuestion: '',
     secretAnswer: '',
     typeOfCard: '',
-  };
+  }
 
-  onSubmit = (firstName : string, lastName : string, creditCardNumber : string, typeOfCard : string) => {
-    
+  onSubmit = (
+    firstName: string,
+    lastName: string,
+    creditCardNumber: string,
+    typeOfCard: string,
+  ) => {
     this.setState({
       firstName,
       lastName,
       creditCardNumber,
-      typeOfCard, 
+      typeOfCard,
     })
-  };
+  }
 
   render() {
     console.log('(render) App')
 
     return (
-      
       <div className="App">
         <Component1 onSubmit={this.onSubmit} />
         <Component2

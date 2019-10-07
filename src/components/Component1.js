@@ -31,18 +31,17 @@ type State = {|
   submitFormVisible: boolean,
   typeOfCard: string,
 
-  fieldValidationErrors: object, 
+  fieldValidationErrors: object,
 
   formValid: any,
   formErrors: object,
- 
 |}
 
 const cardRegex = RegExp(/^[0-9]{16}$/)
 const cvvRegex = RegExp(/^[0-9]{3,4}$/)
 const expRegex = RegExp(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)
 
-export class Component1 extends Component<Props, State> {
+export class Component1 extends React.PureComponent<Props, State> {
   state = {
     creditCardNumber: '',
     cvv: '',
@@ -53,7 +52,7 @@ export class Component1 extends Component<Props, State> {
     secretAnswer: '',
     submitFormVisible: false,
     typeOfCard: '',
-   
+
     formValid: object,
     fieldValidationErrors: '',
     formErrors: {
@@ -64,7 +63,7 @@ export class Component1 extends Component<Props, State> {
       lastName: '',
       secretQuestion: '',
       secretAnswer: '',
-    }
+    },
   }
 
   validateForm() {
@@ -105,9 +104,7 @@ export class Component1 extends Component<Props, State> {
 
     switch (fieldName) {
       case 'creditCardNumber':
-        fieldValidationErrors.creditCardNumber = value.match(cardRegex)
-          ? ''
-          : 'invalid card number'
+        fieldValidationErrors.creditCardNumber = value.match(cardRegex) ? '' : 'invalid card number'
         break
 
       case 'cvv':
@@ -117,12 +114,10 @@ export class Component1 extends Component<Props, State> {
         fieldValidationErrors.expirationDate = value.match(expRegex) ? '' : 'invalid MM/YY'
         break
       case 'firstName':
-        fieldValidationErrors.firstName =
-          value.length < 3 ? 'minimum 3 characaters required' : ''
+        fieldValidationErrors.firstName = value.length < 3 ? 'minimum 3 characaters required' : ''
         break
       case 'lastName':
-        fieldValidationErrors.lastName =
-          value.length < 2 ? 'minimum 3 characaters required' : ''
+        fieldValidationErrors.lastName = value.length < 2 ? 'minimum 3 characaters required' : ''
         break
       case 'secretQuestion':
         fieldValidationErrors.secretQuestion =
@@ -244,6 +239,5 @@ export class Component1 extends Component<Props, State> {
     )
   }
 }
-
 
 export default Component1

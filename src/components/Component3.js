@@ -1,37 +1,35 @@
 //@flow
 
-import React, { Component } from 'react'
-import PropTypes, { number, any } from 'prop-types'
-import { List, ListItem } from 'material-ui/List'
+import React, {Component} from 'react'
+import PropTypes, {number, any} from 'prop-types'
+import {List, ListItem} from 'material-ui/List'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 type Props = {
   creditCardNumber: any,
   onTypeOfCard: (v1: string) => void,
-};
-
-type State = {
-    typeOfCard: string,
 }
 
+type State = {
+  typeOfCard: string,
+}
 
-export class Component3 extends Component<Props, State> {
+export class Component3 extends React.PureComponent<Props, State> {
   state = {
     typeOfCard: '',
-   
   }
 
   componentDidMount() {
-    const { creditCardNumber } = this.props
+    const {creditCardNumber} = this.props
 
     const lastNums = creditCardNumber.slice(12, 16)
     const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card'
 
-    this.setState({ typeOfCard })
+    this.setState({typeOfCard})
   }
 
-  componentDidUpdate = (prevProps : Props) => {
-    const { creditCardNumber, onTypeOfCard } = this.props
+  componentDidUpdate = (prevProps: Props) => {
+    const {creditCardNumber, onTypeOfCard} = this.props
     if (prevProps.creditCardNumber !== creditCardNumber) {
       const lastNums = creditCardNumber.slice(12, 16)
       const typeOfCard = lastNums < 2000 ? 'Visa' : 'Master Card'
@@ -49,9 +47,8 @@ export class Component3 extends Component<Props, State> {
     if (!this.state.typeOfCard) {
       return null
     }
-    
+
     return <div></div>
-    
   }
 }
 
