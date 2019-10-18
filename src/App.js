@@ -1,8 +1,15 @@
 //@flow
+/*eslint-disable*/
+
 import React from 'react'
 import './App.css'
-import Component1 from './components/Component1'
-import {Component2} from './components/Component2'
+
+import ContainerC1 from './components/Component1/ContainerC1'
+import ContainerC2 from './components/Component2/ContainerC2'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import {rootReducer} from './configs/rootReducer'
+const store = createStore(rootReducer)
 
 type Props = {
   onSubmit: (
@@ -25,44 +32,16 @@ type State = {|
 |}
 
 export class App extends React.Component<Props, State> {
-  state = {
-    creditCardNumber: '',
-    cvv: '',
-    expirationDate: '',
-    firstName: '',
-    lastName: '',
-    secretQuestion: '',
-    secretAnswer: '',
-    typeOfCard: '',
-  }
-
-  onSubmit = (
-    firstName: string,
-    lastName: string,
-    creditCardNumber: string,
-    typeOfCard: string,
-  ) => {
-    this.setState({
-      firstName,
-      lastName,
-      creditCardNumber,
-      typeOfCard,
-    })
-  }
-
   render() {
-    console.log('(render) App')
+    console.log('(render) App___0')
 
     return (
-      <div className="App">
-        <Component1 onSubmit={this.onSubmit} />
-        <Component2
-          firstName={this.state.firstName}
-          lastName={this.state.lastName}
-          creditCardNumber={this.state.creditCardNumber}
-          typeOfCard={this.state.typeOfCard}
-        />
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <ContainerC1 />
+          <ContainerC2 />
+        </div>
+      </Provider>
     )
   }
 }

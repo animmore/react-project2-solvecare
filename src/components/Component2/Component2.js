@@ -4,7 +4,6 @@ import React, {Component} from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {List, ListItem} from 'material-ui/List'
 
-import '../App.css'
 import {number} from 'prop-types'
 
 type Props = {
